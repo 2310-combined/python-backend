@@ -1,5 +1,6 @@
 from flask import Blueprint, request, jsonify
-from app import db
+# Import db from the extensions module instead of from app directly
+from app.extensions import db
 from app.models.models import User
 
 # Define the Blueprint for user routes

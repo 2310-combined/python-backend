@@ -1,12 +1,12 @@
-
 from flask import Blueprint, request, jsonify
-from app import db
+# Corrected import statement for db
+from app.extensions import db
 from app.models.models import User, Trip
 
-# Define the Blueprint
+# Define the Blueprint for trip routes
 trip_bp = Blueprint('trip_bp', __name__)
 
-@app.route('/users/<int:user_id>/trips', methods=['POST'])
+@trip_bp.route('/users/<int:user_id>/trips', methods=['POST'])
 def create_trip(user_id):
     user = User.query.get_or_404(user_id)
     data = request.get_json()
@@ -17,7 +17,7 @@ def create_trip(user_id):
     db.session.commit()
     return jsonify({'id': new_trip.id, 'destination': new_trip.destination}), 201
 
-@app.route('/users/<int:user_id>/trips', methods=['GET'])
+@trip_bp.route('/users/<int:user_id>/trips', methods=['GET'])
 def get_trips(user_id):
     trips = Trip.query.filter_by(user_id=user_id).all()
     return jsonify([{'id': trip.id, 'destination': trip.destination} for trip in trips]), 200
