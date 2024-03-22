@@ -1,7 +1,10 @@
 
-from flask import request, jsonify
+from flask import Blueprint, request, jsonify
 from app import db
 from app.models.models import User, Trip
+
+# Define the Blueprint
+trip_bp = Blueprint('trip_bp', __name__)
 
 @app.route('/users/<int:user_id>/trips', methods=['POST'])
 def create_trip(user_id):

@@ -1,16 +1,11 @@
-from flask import request, jsonify
+from flask import Blueprint, request, jsonify
 from app import db
-from app.models.models import User, Trip
+from app.models.models import User
 
-@app.route('/')
-def hello():
-    return "Hello, World!"
+# Define the Blueprint for user routes
+user_bp = Blueprint('user_bp', __name__)
 
-if __name__ == '__main__':
-    db.create_all()
-    app.run(debug=True)
-
-@app.route('/users', methods=['POST'])
+@user_bp.route('/users', methods=['POST'])
 def create_user():
     data = request.get_json()
     if not data or not data.get('name'):
@@ -20,12 +15,12 @@ def create_user():
     db.session.commit()
     return jsonify({'id': new_user.id, 'name': new_user.name}), 201
 
-@app.route('/users', methods=['GET'])
+@user_bp.route('/users', methods=['GET'])
 def get_users():
     users = User.query.all()
     return jsonify([{'id': user.id, 'name': user.name} for user in users]), 200
 
-@app.route('/users/<int:user_id>', methods=['GET'])
+@user_bp.route('/users/<int:user_id>', methods=['GET'])
 def get_user(user_id):
     user = User.query.get_or_404(user_id)
     return jsonify({'id': user.id, 'name': user.name}), 200
