@@ -3,7 +3,7 @@ from datetime import datetime
 
 class User(db.Model):
     __tablename__ = 'users'
-    
+
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(255), nullable=False, unique=True)
     first_name = db.Column(db.String(255), nullable=False)
@@ -14,7 +14,7 @@ class User(db.Model):
 
 class Trip(db.Model):
     __tablename__ = 'trips'
-    
+
     id = db.Column(db.Integer, primary_key=True)
     start_location = db.Column(db.String(255), nullable=False)
     end_location = db.Column(db.String(255), nullable=False)
