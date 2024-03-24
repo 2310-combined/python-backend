@@ -16,4 +16,5 @@
 11. pip install psycopg2
 12. flask db updgrade
 13. pip install pytest
-14. flask run
+14. pip install flask-cors
+15. flask run
