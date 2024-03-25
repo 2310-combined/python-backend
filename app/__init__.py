@@ -12,8 +12,6 @@ def create_app(config_class='config.Config'):
     config_name = os.getenv('FLASK_CONFIG', config_class)
     app.config.from_object(config_name)
     
-    # Initialize CORS with default settings to allow all domains
-    # Customize CORS settings as needed
     CORS(app)
     
     # Initialize extensions
