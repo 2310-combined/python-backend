@@ -18,16 +18,16 @@ def test_new_user(new_user):
 @pytest.fixture(scope='module')
 def new_trip(new_user):
     trip = Trip(
-        start_location="Location A",
-        end_location="Location B",
-        trip_duration="3 days",
+        start_location="45.453, -45.666",
+        end_location="34.656, -45.567",
+        trip_duration="2345234",
         time_of_trip=datetime.utcnow() + timedelta(days=1),
         user=new_user
     )
     return trip
 
 def test_new_trip(new_trip):
-    assert new_trip.start_location == "Location A"
-    assert new_trip.end_location == "Location B"
-    assert new_trip.trip_duration == "3 days"
+    assert new_trip.start_location == "45.453, -45.666"
+    assert new_trip.end_location == "34.656, -45.567"
+    assert new_trip.trip_duration == "2345234"
     # Add more assertions as needed
