@@ -38,3 +38,16 @@ def get_trips(user_id):
         'trip_duration': trip.trip_duration,
         'time_of_trip': trip.time_of_trip.strftime('%Y-%m-%d %H:%M:%S')  # Adjust format as needed
     } for trip in trips]), 200
+
+@trip_bp.route('/trips/<int:trip_id>', methods=['DELETE'])
+def delete_trip(trip_id):
+    # Query the database to find the trip by its ID
+    trip = Trip.query.get_or_404(trip_id)
+
+    # Delete the trip from the database
+    db.session.delete(trip)
+    db.session.commit()
+
+    # Return a response indicating successful deletion
+    return jsonify({'message': 'Trip deleted successfully'}), 200
+
