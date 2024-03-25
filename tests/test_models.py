@@ -1,4 +1,3 @@
-# tests/test_models.py
 import pytest
 from app.extensions import db
 from app.models.models import User, Trip
@@ -13,7 +12,6 @@ def test_new_user(new_user):
     assert new_user.email == "test@example.com"
     assert new_user.first_name == "Test"
     assert new_user.last_name == "User"
-    # Add more assertions as needed
 
 @pytest.fixture(scope='module')
 def new_trip(new_user):
@@ -30,4 +28,4 @@ def test_new_trip(new_trip):
     assert new_trip.start_location == "45.453, -45.666"
     assert new_trip.end_location == "34.656, -45.567"
     assert new_trip.trip_duration == "2345234"
-    # Add more assertions as needed
+    assert isinstance(new_trip.time_of_trip, datetime)
