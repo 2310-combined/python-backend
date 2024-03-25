@@ -14,7 +14,14 @@
 9. pip install flask-SQLAlchemy
 10. pip install flask-migrate
 11. pip install psycopg2
-12. flask db updgrade
+12. flask db upgrade
 13. pip install pytest
 14. pip install flask-cors
 15. flask run
+
+### Other Useful Components
+
+1. pip install flask-cors
+2. flask db init
+3. flask db migrate -m "custom message"
+4. flask db upgrade
