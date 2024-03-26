@@ -44,3 +44,17 @@ def test_get_trips(test_client):
     response = test_client.get('/users/1/trips')
     assert response.status_code == 200
     # Validate the structure of your response data as needed
+
+def test_delete_trip(test_client):
+    # First, create a trip to be deleted
+    new_trip = Trip(user_id=1, start_location='Location A', end_location='Location B', trip_duration=60, time_of_trip=(datetime.utcnow() + timedelta(days=1)).strftime('%Y-%m-%d %H:%M:%S'))
+    _db.session.add(new_trip)
+    _db.session.commit()
+
+    # Send a DELETE request to the delete_trip endpoint
+    response = test_client.delete(f'/trips/{new_trip.id}')
+
+    # Check if the trip was deleted successfully
+    assert response.status_code == 200
+    assert Trip.query.get(new_trip.id) is None
+
