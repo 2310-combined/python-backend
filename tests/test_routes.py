@@ -58,3 +58,20 @@ def test_delete_trip(test_client):
     assert response.status_code == 200
     assert Trip.query.get(new_trip.id) is None
 
+def test_create_user(test_client):
+    # Data for the new user
+    user_data = {
+        'email': 'boo#booboo.com',
+        'first_name': 'Ooboo',
+        'last_name': 'Boo'
+    }
+
+    response = test_client.post('/users', json=user_data)
+    assert response.status_code == 201
+    assert 'id' in response.json
+
+def test_show_user(test_client):
+    # Assuming a user with ID 1 exists
+    response = test_client.get('/users/1')
+    assert response.status_code == 200
+    
