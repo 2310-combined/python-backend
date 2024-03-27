@@ -22,9 +22,6 @@ def create_user():
 
 @user_bp.route('/users/<int:user_id>', methods=['GET'])
 def get_user(user_id):
-    """
-    Fetch a user by their user ID.
-    """
     user = User.query.get_or_404(user_id)
     return jsonify({
         'id': user.id, 
@@ -32,3 +29,4 @@ def get_user(user_id):
         'first_name': user.first_name, 
         'last_name': user.last_name
     }), 200
+
