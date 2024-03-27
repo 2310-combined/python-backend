@@ -1,20 +1,20 @@
 import os
 
 class Config(object):
-    SQLALCHEMY_DATABASE_URI = 'postgresql://nathan:please@localhost/capstone'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+    # Default to using a PostgreSQL database named 'capstone' on localhost
+    SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URI', 'postgresql://localhost/capstone')
 
 class DevelopmentConfig(Config):
     DEBUG = True
-    SQLALCHEMY_DATABASE_URI = os.environ.get('DEV_DATABASE_URI') or \
-                            'postgresql://nathan:please@localhost/capstone'
+    # Look for DEV_DATABASE_URI environment variable; otherwise, use the default URI
+    SQLALCHEMY_DATABASE_URI = os.getenv('DEV_DATABASE_URI', 'postgresql://localhost/capstone_dev')
 
 class TestConfig(Config):
     TESTING = True
-    SQLALCHEMY_DATABASE_URI = os.environ.get('TEST_DATABASE_URI') or \
-                            'postgresql://nathan:please@localhost/capstone_test'
-    # Any other test-specific settings
+    # Look for TEST_DATABASE_URI environment variable; otherwise, use a separate test database
+    SQLALCHEMY_DATABASE_URI = os.getenv('TEST_DATABASE_URI', 'postgresql://localhost/capstone_test')
 
 class ProductionConfig(Config):
-    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URI') or \
-                            'postgresql://nathan:please@localhost/capstone'
+    # In production, DATABASE_URI must be set; there is no default.
+    SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URI')
