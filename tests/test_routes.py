@@ -94,3 +94,27 @@ def test_user_index(test_client):
     response = test_client.get('/users')
     assert response.status_code == 200
     assert len(response.json) == 3 # 3 because there are 2 users and one from earlier test
+
+def test_update_user(test_client):
+    # First, create a user to be updated
+    new_user = User(email='original@example.com', first_name='Original', last_name='User')
+    _db.session.add(new_user)
+    _db.session.commit()
+
+    updated_data = {
+        'email': 'updated@example.com',
+        'first_name': 'Updated',
+        'last_name': 'User'
+    }
+
+    # Send a PUT request to the update_user endpoint
+    response = test_client.put(f'/users/{new_user.id}', json=updated_data)
+
+    # Fetch the updated user from the database
+    updated_user = User.query.get(new_user.id)
+
+    # Check if the user was updated successfully
+    assert response.status_code == 200
+    assert updated_user.email == 'updated@example.com'
+    assert updated_user.first_name == 'Updated'
+    assert updated_user.last_name == 'User'
