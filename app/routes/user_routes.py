@@ -30,3 +30,13 @@ def get_user(user_id):
         'last_name': user.last_name
     }), 200
 
+@user_bp.route('/users', methods=['GET'])
+def get_users():
+    users = User.query.all()
+    return jsonify([{
+        'id': user.id, 
+        'email': user.email,
+        'first_name': user.first_name, 
+        'last_name': user.last_name
+    } for user in users]), 200
+

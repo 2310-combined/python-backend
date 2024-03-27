@@ -75,3 +75,22 @@ def test_show_user(test_client):
     response = test_client.get('/users/1')
     assert response.status_code == 200
     
+def test_user_index(test_client):
+    user_data1 = {
+        'email': 'boo#booboo1.com',
+        'first_name': 'Ooboo1',
+        'last_name': 'Boo1'
+    }
+
+    user_data2 = {
+        'email': 'boo#booboo1.com',
+        'first_name': 'Ooboo1',
+        'last_name': 'Boo1'
+    }
+
+    test_client.post('/users', json=user_data1)
+    test_client.post('/users', json=user_data2)
+
+    response = test_client.get('/users')
+    assert response.status_code == 200
+    assert len(response.json) == 3 # 3 because there are 2 users and one from earlier test
