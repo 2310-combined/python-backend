@@ -30,3 +30,25 @@ def get_user(user_id):
         'last_name': user.last_name
     }), 200
 
+@user_bp.route('/users', methods=['GET'])
+def get_users():
+    users = User.query.all()
+    return jsonify([{
+        'id': user.id, 
+        'email': user.email,
+        'first_name': user.first_name, 
+        'last_name': user.last_name
+    } for user in users]), 200
+
+@user_bp.route('/users/<int:user_id>', methods=['PUT'])
+def update_user(user_id):
+    user = User.query.get_or_404(user_id)
+    data = request.get_json()
+
+    user.email = data.get('email', user.email)
+    user.first_name = data.get('first_name', user.first_name)
+    user.last_name = data.get('last_name', user.last_name)
+
+    db.session.commit()
+
+    return jsonify({'id': user.id, 'email': user.email, 'first_name': user.first_name, 'last_name': user.last_name}), 200
