@@ -104,6 +104,6 @@ Here are some additional commands that may be useful during development:
 If you have a recommendation for improvements, please feel free to make a pull request!
 
 ## Acknowledgments 
-  - Project concept by Jamie Francisco 
+  - Project concept by [Jamie Francisco](https://www.linkedin.com/in/jamiefrancisco/)
   - Technical direction, consultation, and moral support by [Jeremiah Black](https://www.linkedin.com/in/jeremiah-blackol/) and [Khoa Nguyen](https://www.linkedin.com/in/khoa-n323/)
   - This project completed by Mod 4 students at [Turing School of Software and Design](https://turing.edu/)
