@@ -99,6 +99,68 @@ Here are some additional commands that may be useful during development:
   flask db upgrade
   ```
 
+## Endpoints
+
+Note: Endpoints examples use flask local host.
+Here are the endpoints you can use to access the database:
+
+- Post User
+
+```
+POST http://127.0.0.1:5000/users
+
+{
+  "email": "example@mails.com",
+  "first_name": "Joe",
+  "last_name": "Dude"
+}
+```
+
+- Show User
+
+```
+GET http://127.0.0.1:5000/users/:id
+```
+
+- Index Users
+
+```
+GET http://127.0.0.1:5000/users
+```
+
+- Update User
+
+```
+PUT http://127.0.0.1:5000/users/:id
+
+!Coming Soon!
+```
+
+- Create Trip
+
+```
+POST http://127.0.0.1:5000/users/:id/trips
+
+{
+  "start_location": "-541343, 24734",
+  "end_location": "-45458 349043",
+  "trip_duration": "704",
+  "time_of_trip": "2024-03-23 13:11:01"
+}
+```
+
+- Index User's Trips
+
+```
+GET http://127.0.0.1:5000/users/:id/trips
+```
+
+- Delete Trip
+
+```
+DELETE http://127.0.0.1:5000/trips/:id
+```
+
 ## Contributing
 
 If you have a recommendation for improvements, please feel free to make a pull request!
