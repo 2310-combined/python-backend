@@ -1,34 +1,39 @@
-# This config was automatically generated from your source code
-# Stacks detected: deps:python:.
+
 version: 2.1
 orbs:
-  python: circleci/python@2
+  python: circleci/python@2.0.3
+  heroku: circleci/heroku@1.2.6
+
 jobs:
-  test-python:
-    # Install dependencies and run tests
-    docker:
-      - image: cimg/python:3.8-node
+  build_and_test: # this can be any name you choose
+    executor: python/default
     steps:
       - checkout
-      - python/install-packages
+      - python/install-packages:
+          pkg-manager: pip
       - run:
           name: Run tests
-          command: pytest --junitxml=junit.xml || ((($? == 5)) && echo 'Did not find any tests to run.')
-      - store_test_results:
-          path: junit.xml
-  deploy:
-    # This is an example deploy job, not actually used by the workflow
-    docker:
-      - image: cimg/base:stable
+          command: python -m pytest
+      - persist_to_workspace:
+          root: ~/project
+          paths:
+            - .
+
+  deploy: # this can be any name you choose
+    executor: python/default
     steps:
-      # Replace this with steps to deploy to users
-      - run:
-          name: deploy
-          command: '#e.g. ./deploy.sh'
+      - attach_workspace:
+          at: ~/project
+      - heroku/deploy-via-git:
+          force: true # force push when pushing to the heroku remote, see: https://devcenter.heroku.com/articles/git
+
 workflows:
-  build-and-test:
+  test_my_app:
     jobs:
-      - test-python
-    # - deploy:
-    #     requires:
-    #       - test-python
+      - build_and_test
+      - deploy:
+          requires:
+            - build_and_test # only deploy if the build_and_test job has completed
+          filters:
+            branches:
+              only: main # only deploy when on main

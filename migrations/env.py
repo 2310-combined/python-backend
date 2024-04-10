@@ -1,3 +1,4 @@
+from flask_sqlalchemy import SQLAlchemy
 import logging
 from logging.config import fileConfig
 
