@@ -1,41 +1,46 @@
 version: 2.1
 orbs:
-  python: circleci/python@1.4.0  # Ensure you're using the latest version or one that supports your needs
+  python: circleci/python@1.4.0
 
 jobs:
-  test-python:
+  build:
     docker:
-      - image: cimg/python:3.8  # Good choice for a stable Python version
+      - image: cimg/python:3.8
+      - image: circleci/postgresql:13.3  # Use PostgreSQL docker image
+        environment:
+          POSTGRES_USER: youruser  # Default user
+          POSTGRES_DB: yourtestdb  # Default database
+          POSTGRES_PASSWORD: yourpassword  # Password for default user
+
     steps:
       - checkout
       - python/install-packages:
-          pkg-manager: pip  # Correct, using pip for Python package management
-          pip-dependency-file: requirements.txt  # Correctly points to your dependency file
+          pkg-manager: pip
+          pip-dependency-file: requirements.txt
+
+      - run:
+          name: Wait for DB
+          command: |
+            for i in `seq 1 10`;
+            do
+              nc -z localhost 5432 && echo Success && exit 0
+              echo -n .
+              sleep 1
+            done
+            echo Failed waiting for DB && exit 1
+
       - run:
           name: Run tests
           command: |
-            pytest --junitxml=junit.xml  # Correct syntax for running pytest and exporting results to JUnit XML
-      - store_test_results:
-          path: junit.xml  # Stores test results for viewing in CircleCI's Test Summary
-      - store_artifacts:  # This is optional but useful for debugging
-          path: junit.xml  # Ensures test report is available as an artifact
+            pytest --junitxml=junit.xml
 
-  deploy:
-    docker:
-      - image: cimg/base:stable  # Minimal base image for deployment steps
-    steps:
-      - checkout
-      - run:
-          name: Deploy to Production
-          command: |
-            echo "Deploy steps go here"
-            # Replace echo with real deployment commands, e.g., scripts to push to a server or cloud provider
+      - store_test_results:
+          path: junit.xml
+      - store_artifacts:
+          path: junit.xml
 
 workflows:
-  build-and-test:
+  version: 2
+  build_and_test:
     jobs:
-      - test-python
-      # - deploy:
-      #     requires:
-      #       - test-python
-      # Uncomment the above lines to enable deployment after tests pass successfully
+      - build
