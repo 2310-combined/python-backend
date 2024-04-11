@@ -3,4 +3,5 @@ Flask
 sqlalchemy
 flask-cors
 flask-sqlalchemy
+flask-migrate
 
