@@ -1,41 +1,41 @@
 version: 2.1
 orbs:
-  python: circleci/python@1.4.0  # Update the orb version if necessary
+  python: circleci/python@1.4.0  # Ensure you're using the latest version or one that supports your needs
 
 jobs:
   test-python:
     docker:
-      - image: cimg/python:3.8  # Use Python 3.8 image
+      - image: cimg/python:3.8  # Good choice for a stable Python version
     steps:
       - checkout
       - python/install-packages:
-          pkg-manager: pip  # Make sure this uses pip if you are using a requirements.txt
-          pip-dependency-file: requirements.txt  # Specify your dependency file accurately
+          pkg-manager: pip  # Correct, using pip for Python package management
+          pip-dependency-file: requirements.txt  # Correctly points to your dependency file
       - run:
           name: Run tests
           command: |
-            pytest --junitxml=junit.xml  # Run pytest and generate a JUnit XML report
+            pytest --junitxml=junit.xml  # Correct syntax for running pytest and exporting results to JUnit XML
       - store_test_results:
-          path: junit.xml  # Store the results for CircleCI's test summary
-      - store_artifacts:  # Optional: store test artifacts (like logs)
-          path: junit.xml
+          path: junit.xml  # Stores test results for viewing in CircleCI's Test Summary
+      - store_artifacts:  # This is optional but useful for debugging
+          path: junit.xml  # Ensures test report is available as an artifact
 
   deploy:
     docker:
-      - image: cimg/base:stable
+      - image: cimg/base:stable  # Minimal base image for deployment steps
     steps:
       - checkout
       - run:
           name: Deploy to Production
           command: |
             echo "Deploy steps go here"
-            # Add your actual deploy commands here
+            # Replace echo with real deployment commands, e.g., scripts to push to a server or cloud provider
 
 workflows:
   build-and-test:
     jobs:
       - test-python
-      # Uncomment the next lines when the deploy job is ready to be used
       # - deploy:
       #     requires:
       #       - test-python
+      # Uncomment the above lines to enable deployment after tests pass successfully
