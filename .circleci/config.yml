@@ -8,10 +8,9 @@ jobs:
       - image: cimg/python:3.8
       - image: postgres:13.3
         environment:
-          POSTGRES_USER: nathan
-          POSTGRES_PASSWORD: pleased
-          POSTGRES_DB: capstone_test  # Adjust based on specific test, dev, or prod environment
-
+          POSTGRES_USER: nathan  # Use the user specified in your .env file
+          POSTGRES_PASSWORD: pleased  # Use the password from your .env file
+          POSTGRES_DB: capstone_test  # Use a specific test database
     steps:
       - checkout
       - run:
