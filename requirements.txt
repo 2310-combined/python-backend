@@ -4,3 +4,4 @@ Flask>=1.1.2
 Flask-SQLAlchemy
 flask-migrate
 pytest-flask>=0.15.1
+flask_cors>=3.0.10
