@@ -1,34 +1,41 @@
-# This config was automatically generated from your source code
-# Stacks detected: deps:python:.
 version: 2.1
 orbs:
-  python: circleci/python@2
+  python: circleci/python@1.4.0  # Update the orb version if necessary
+
 jobs:
   test-python:
-    # Install dependencies and run tests
     docker:
-      - image: cimg/python:3.8-node
+      - image: cimg/python:3.8  # Use Python 3.8 image
     steps:
       - checkout
-      - python/install-packages
+      - python/install-packages:
+          pkg-manager: pip  # Make sure this uses pip if you are using a requirements.txt
+          pip-dependency-file: requirements.txt  # Specify your dependency file accurately
       - run:
           name: Run tests
-          command: pytest --junitxml=junit.xml || ((($? == 5)) && echo 'Did not find any tests to run.')
+          command: |
+            pytest --junitxml=junit.xml  # Run pytest and generate a JUnit XML report
       - store_test_results:
+          path: junit.xml  # Store the results for CircleCI's test summary
+      - store_artifacts:  # Optional: store test artifacts (like logs)
           path: junit.xml
+
   deploy:
-    # This is an example deploy job, not actually used by the workflow
     docker:
       - image: cimg/base:stable
     steps:
-      # Replace this with steps to deploy to users
+      - checkout
       - run:
-          name: deploy
-          command: '#e.g. ./deploy.sh'
+          name: Deploy to Production
+          command: |
+            echo "Deploy steps go here"
+            # Add your actual deploy commands here
+
 workflows:
   build-and-test:
     jobs:
       - test-python
-    # - deploy:
-    #     requires:
-    #       - test-python
+      # Uncomment the next lines when the deploy job is ready to be used
+      # - deploy:
+      #     requires:
+      #       - test-python
