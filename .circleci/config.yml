@@ -6,18 +6,13 @@ jobs:
   build:
     docker:
       - image: cimg/python:3.8
-      - image: circleci/postgresql:13.3  # Use PostgreSQL docker image
+      - image: postgres:13.3
         environment:
-          POSTGRES_USER: youruser  # Default user
-          POSTGRES_DB: yourtestdb  # Default database
-          POSTGRES_PASSWORD: yourpassword  # Password for default user
-
+          POSTGRES_USER: youruser
+          POSTGRES_DB: yourtestdb
+          POSTGRES_PASSWORD: yourpassword
     steps:
       - checkout
-      - python/install-packages:
-          pkg-manager: pip
-          pip-dependency-file: requirements.txt
-
       - run:
           name: Wait for DB
           command: |
@@ -28,19 +23,14 @@ jobs:
               sleep 1
             done
             echo Failed waiting for DB && exit 1
-
+      - python/install-packages:
+          pkg-manager: pip
+          pip-dependency-file: requirements.txt
       - run:
           name: Run tests
           command: |
             pytest --junitxml=junit.xml
-
       - store_test_results:
           path: junit.xml
       - store_artifacts:
           path: junit.xml
-
-workflows:
-  version: 2
-  build_and_test:
-    jobs:
-      - build
