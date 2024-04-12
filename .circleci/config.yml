@@ -23,7 +23,7 @@ jobs:
           command: |
             for i in `seq 1 10`;
             do
-              PGPASSWORD=pleased psql -h localhost -U nathan -d capstone_test -c "SELECT 1" && echo "Success" && exit 0
+              PGPASSWORD=pleased psql -h localhost -U circleci -d capstone_test -c "SELECT 1" && echo "Success" && exit 0
               echo -n "."
               sleep 1
             done
