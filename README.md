@@ -75,6 +75,14 @@ pytest
 
 Here are some additional commands that may be useful during development:
 
+- **Start Virtual Environment**
+
+  ```
+  python3 -m venv venv
+  source venv/bin/activate
+  python3 -m pip install --upgrade pip
+  ```
+
 - **Install Flask-CORS**
 
   ```
