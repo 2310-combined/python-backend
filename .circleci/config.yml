@@ -19,10 +19,6 @@ jobs:
             python -m pip install --upgrade pip
             pip install -r requirements.txt
       - run:
-          name: Set up DB user and database
-          command: |
-            PGPASSWORD=pleased psql -h localhost -U postgres -c "CREATE ROLE nathan LOGIN CREATEDB PASSWORD 'pleased';"
-      - run:
           name: Wait for DB
           command: |
             for i in `seq 1 10`;
