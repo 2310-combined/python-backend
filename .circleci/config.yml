@@ -1,3 +1,7 @@
+version: 2.1
+orbs:
+  python: circleci/python@1.4.0
+
 jobs:
   build:
     docker:
@@ -12,8 +16,8 @@ jobs:
       - run:
           name: Install dependencies
           command: |
-            sudo apt-get update
-            sudo apt-get install -y postgresql-client
+            python -m pip install --upgrade pip
+            pip install -r requirements.txt
       - run:
           name: Set up DB user and database
           command: |
@@ -28,9 +32,6 @@ jobs:
               sleep 1
             done
             echo "Failed waiting for DB" && exit 1
-      - python/install-packages:
-          pkg-manager: pip
-          pip-dependency-file: requirements.txt
       - run:
           name: Run tests
           command: |
