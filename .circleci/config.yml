@@ -1,16 +1,12 @@
-version: 2.1
-orbs:
-  python: circleci/python@1.4.0
-
 jobs:
   build:
     docker:
       - image: cimg/python:3.8
       - image: postgres:13.3
         environment:
-          POSTGRES_USER: ${POSTGRES_USER}
-          POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-          POSTGRES_DB: ${POSTGRES_DB}
+          POSTGRES_USER: nathan
+          POSTGRES_PASSWORD: pleased
+          POSTGRES_DB: capstone_test
     steps:
       - checkout
       - run:
@@ -18,6 +14,10 @@ jobs:
           command: |
             sudo apt-get update
             sudo apt-get install -y postgresql-client
+      - run:
+          name: Set up DB user and database
+          command: |
+            PGPASSWORD=pleased psql -h localhost -U postgres -c "CREATE ROLE nathan LOGIN CREATEDB PASSWORD 'pleased';"
       - run:
           name: Wait for DB
           command: |
