@@ -1,34 +1,38 @@
-# This config was automatically generated from your source code
-# Stacks detected: deps:python:.
 version: 2.1
 orbs:
-  python: circleci/python@2
+  python: circleci/python@1.4.0
+
 jobs:
-  test-python:
-    # Install dependencies and run tests
+  build:
     docker:
-      - image: cimg/python:3.8-node
+      - image: cimg/python:3.8
+      - image: postgres:13.3
+        environment:
+          POSTGRES_USER: circleci
+          POSTGRES_PASSWORD: pleased
+          POSTGRES_DB: capstone_test
     steps:
       - checkout
-      - python/install-packages
+      - run:
+          name: Install dependencies
+          command: |
+            python -m pip install --upgrade pip
+            pip install -r requirements.txt
+      - run:
+          name: Wait for DB
+          command: |
+            for i in `seq 1 10`;
+            do
+              PGPASSWORD=pleased psql -h localhost -U circleci -d capstone_test -c "SELECT 1" && echo "Success" && exit 0
+              echo -n "."
+              sleep 1
+            done
+            echo "Failed waiting for DB" && exit 1
       - run:
           name: Run tests
-          command: pytest --junitxml=junit.xml || ((($? == 5)) && echo 'Did not find any tests to run.')
+          command: |
+            pytest --junitxml=junit.xml
       - store_test_results:
           path: junit.xml
-  deploy:
-    # This is an example deploy job, not actually used by the workflow
-    docker:
-      - image: cimg/base:stable
-    steps:
-      # Replace this with steps to deploy to users
-      - run:
-          name: deploy
-          command: '#e.g. ./deploy.sh'
-workflows:
-  build-and-test:
-    jobs:
-      - test-python
-    # - deploy:
-    #     requires:
-    #       - test-python
+      - store_artifacts:
+          path: junit.xml

@@ -12,8 +12,8 @@ class DevelopmentConfig(Config):
 
 class TestConfig(Config):
     TESTING = True
-    # Look for TEST_DATABASE_URI environment variable; otherwise, use a separate test database
     SQLALCHEMY_DATABASE_URI = os.getenv('TEST_DATABASE_URI', 'postgresql://localhost/capstone_test')
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 class ProductionConfig(Config):
     # In production, DATABASE_URI must be set; there is no default.
