@@ -1,4 +1,16 @@
-2024-04-11 17:27:21,067 ERROR: Exception on /users [GET] [in /Users/lambo/turing/work/4mod/projects/capstone/capstone_py/stream_cycle/venv/lib/python3.12/site-packages/flask/app.py:838]
+2024-04-11 18:16:23,440 ERROR: Exception on /users/10 [GET] [in /Users/lambo/turing/work/4mod/projects/capstone/capstone_py/stream_cycle/venv/lib/python3.12/site-packages/flask/app.py:838]
+Traceback (most recent call last):
+  File "/Users/lambo/turing/work/4mod/projects/capstone/capstone_py/stream_cycle/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1971, in _exec_single_context
+    self.dialect.do_execute(
+  File "/Users/lambo/turing/work/4mod/projects/capstone/capstone_py/stream_cycle/venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 919, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.errors.UndefinedTable: relation "users" does not exist
+LINE 2: FROM users 
+             ^
+
+
+The above exception was the direct cause of the following exception:
+
 Traceback (most recent call last):
   File "/Users/lambo/turing/work/4mod/projects/capstone/capstone_py/stream_cycle/venv/lib/python3.12/site-packages/flask/app.py", line 1473, in wsgi_app
     response = self.full_dispatch_request()
@@ -15,40 +27,62 @@ Traceback (most recent call last):
   File "/Users/lambo/turing/work/4mod/projects/capstone/capstone_py/stream_cycle/venv/lib/python3.12/site-packages/flask/app.py", line 865, in dispatch_request
     return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/lambo/turing/work/4mod/projects/capstone/capstone_py/stream_cycle/app/routes/user_routes.py", line 35, in get_users
-    users = User.query.all()
-            ^^^^^^^^^^^^^^^^
-  File "/Users/lambo/turing/work/4mod/projects/capstone/capstone_py/stream_cycle/venv/lib/python3.12/site-packages/sqlalchemy/orm/query.py", line 2673, in all
-    return self._iter().all()  # type: ignore
-           ^^^^^^^^^^^^
-  File "/Users/lambo/turing/work/4mod/projects/capstone/capstone_py/stream_cycle/venv/lib/python3.12/site-packages/sqlalchemy/orm/query.py", line 2827, in _iter
-    result: Union[ScalarResult[_T], Result[_T]] = self.session.execute(
-                                                  ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lambo/turing/work/4mod/projects/capstone/capstone_py/stream_cycle/app/routes/user_routes.py", line 25, in get_user
+    user = User.query.get_or_404(user_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lambo/turing/work/4mod/projects/capstone/capstone_py/stream_cycle/venv/lib/python3.12/site-packages/flask_sqlalchemy/query.py", line 30, in get_or_404
+    rv = self.get(ident)
+         ^^^^^^^^^^^^^^^
+  File "<string>", line 2, in get
+  File "/Users/lambo/turing/work/4mod/projects/capstone/capstone_py/stream_cycle/venv/lib/python3.12/site-packages/sqlalchemy/util/deprecations.py", line 386, in warned
+    return fn(*args, **kwargs)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^
+  File "/Users/lambo/turing/work/4mod/projects/capstone/capstone_py/stream_cycle/venv/lib/python3.12/site-packages/sqlalchemy/orm/query.py", line 1127, in get
+    return self._get_impl(ident, loading.load_on_pk_identity)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lambo/turing/work/4mod/projects/capstone/capstone_py/stream_cycle/venv/lib/python3.12/site-packages/sqlalchemy/orm/query.py", line 1136, in _get_impl
+    return self.session._get_impl(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lambo/turing/work/4mod/projects/capstone/capstone_py/stream_cycle/venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 3817, in _get_impl
+    return db_load_fn(
+           ^^^^^^^^^^^
+  File "/Users/lambo/turing/work/4mod/projects/capstone/capstone_py/stream_cycle/venv/lib/python3.12/site-packages/sqlalchemy/orm/loading.py", line 694, in load_on_pk_identity
+    session.execute(
   File "/Users/lambo/turing/work/4mod/projects/capstone/capstone_py/stream_cycle/venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2306, in execute
     return self._execute_internal(
            ^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/lambo/turing/work/4mod/projects/capstone/capstone_py/stream_cycle/venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2170, in _execute_internal
-    ) = compile_state_cls.orm_pre_session_exec(
-        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/lambo/turing/work/4mod/projects/capstone/capstone_py/stream_cycle/venv/lib/python3.12/site-packages/sqlalchemy/orm/context.py", line 549, in orm_pre_session_exec
-    session._autoflush()
-  File "/Users/lambo/turing/work/4mod/projects/capstone/capstone_py/stream_cycle/venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2994, in _autoflush
-    self.flush()
-  File "/Users/lambo/turing/work/4mod/projects/capstone/capstone_py/stream_cycle/venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 4296, in flush
-    self._flush(objects)
-  File "/Users/lambo/turing/work/4mod/projects/capstone/capstone_py/stream_cycle/venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 4388, in _flush
-    flush_context.transaction = transaction = self._autobegin_t()._begin()
-                                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "<string>", line 2, in _begin
-  File "/Users/lambo/turing/work/4mod/projects/capstone/capstone_py/stream_cycle/venv/lib/python3.12/site-packages/sqlalchemy/orm/state_changes.py", line 103, in _go
-    self._raise_for_prerequisite_state(fn.__name__, current_state)
-  File "/Users/lambo/turing/work/4mod/projects/capstone/capstone_py/stream_cycle/venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 928, in _raise_for_prerequisite_state
-    raise sa_exc.PendingRollbackError(
-sqlalchemy.exc.PendingRollbackError: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "users_email_key"
-DETAIL:  Key (email)=(test@example.com) already exists.
+  File "/Users/lambo/turing/work/4mod/projects/capstone/capstone_py/stream_cycle/venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2191, in _execute_internal
+    result: Result[Any] = compile_state_cls.orm_execute_statement(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lambo/turing/work/4mod/projects/capstone/capstone_py/stream_cycle/venv/lib/python3.12/site-packages/sqlalchemy/orm/context.py", line 293, in orm_execute_statement
+    result = conn.execute(
+             ^^^^^^^^^^^^^
+  File "/Users/lambo/turing/work/4mod/projects/capstone/capstone_py/stream_cycle/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1422, in execute
+    return meth(
+           ^^^^^
+  File "/Users/lambo/turing/work/4mod/projects/capstone/capstone_py/stream_cycle/venv/lib/python3.12/site-packages/sqlalchemy/sql/elements.py", line 514, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lambo/turing/work/4mod/projects/capstone/capstone_py/stream_cycle/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1644, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lambo/turing/work/4mod/projects/capstone/capstone_py/stream_cycle/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1850, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lambo/turing/work/4mod/projects/capstone/capstone_py/stream_cycle/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1990, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/Users/lambo/turing/work/4mod/projects/capstone/capstone_py/stream_cycle/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 2357, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/Users/lambo/turing/work/4mod/projects/capstone/capstone_py/stream_cycle/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1971, in _exec_single_context
+    self.dialect.do_execute(
+  File "/Users/lambo/turing/work/4mod/projects/capstone/capstone_py/stream_cycle/venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 919, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.ProgrammingError: (psycopg2.errors.UndefinedTable) relation "users" does not exist
+LINE 2: FROM users 
+             ^
 
-[SQL: INSERT INTO users (email, first_name, last_name, created_at, updated_at) VALUES (%(email)s, %(first_name)s, %(last_name)s, %(created_at)s, %(updated_at)s) RETURNING users.id]
-[parameters: {'email': 'test@example.com', 'first_name': 'Test', 'last_name': 'User', 'created_at': datetime.datetime(2024, 4, 11, 22, 27, 20, 823944, tzinfo=datetime.timezone.utc), 'updated_at': datetime.datetime(2024, 4, 11, 22, 27, 20, 823948, tzinfo=datetime.timezone.utc)}]
-(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
-2024-04-11 17:29:05,299 INFO: Your application startup [in /Users/lambo/turing/work/4mod/projects/capstone/capstone_py/stream_cycle/app/__init__.py:31]
-2024-04-11 18:16:05,260 INFO: Your application startup [in /Users/lambo/turing/work/4mod/projects/capstone/capstone_py/stream_cycle/app/__init__.py:31]
+[SQL: SELECT users.id AS users_id, users.email AS users_email, users.first_name AS users_first_name, users.last_name AS users_last_name, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.id = %(pk_1)s]
+[parameters: {'pk_1': 10}]
+(Background on this error at: https://sqlalche.me/e/20/f405)

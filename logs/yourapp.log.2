@@ -1,89 +1,88 @@
-2024-04-11 18:16:39,491 ERROR: Exception on /users/10 [GET] [in /Users/lambo/turing/work/4mod/projects/capstone/capstone_py/stream_cycle/venv/lib/python3.12/site-packages/flask/app.py:838]
+2024-04-01 08:45:56,071 ERROR: Exception on /users/2 [PUT] [in /Users/scottdevoss/turing/4mod/projects/capstone/python/python-backend/venv/lib/python3.9/site-packages/flask/app.py:828]
 Traceback (most recent call last):
-  File "/Users/lambo/turing/work/4mod/projects/capstone/capstone_py/stream_cycle/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1971, in _exec_single_context
+  File "/Users/scottdevoss/turing/4mod/projects/capstone/python/python-backend/venv/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1971, in _exec_single_context
     self.dialect.do_execute(
-  File "/Users/lambo/turing/work/4mod/projects/capstone/capstone_py/stream_cycle/venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 919, in do_execute
+  File "/Users/scottdevoss/turing/4mod/projects/capstone/python/python-backend/venv/lib/python3.9/site-packages/sqlalchemy/engine/default.py", line 919, in do_execute
     cursor.execute(statement, parameters)
-psycopg2.errors.UndefinedTable: relation "users" does not exist
-LINE 2: FROM users 
-             ^
+psycopg2.errors.UniqueViolation: duplicate key value violates unique constraint "users_email_key"
+DETAIL:  Key (email)=(lambertones239@gmail.com) already exists.
 
 
 The above exception was the direct cause of the following exception:
 
 Traceback (most recent call last):
-  File "/Users/lambo/turing/work/4mod/projects/capstone/capstone_py/stream_cycle/venv/lib/python3.12/site-packages/flask/app.py", line 1473, in wsgi_app
+  File "/Users/scottdevoss/turing/4mod/projects/capstone/python/python-backend/venv/lib/python3.9/site-packages/flask/app.py", line 1463, in wsgi_app
     response = self.full_dispatch_request()
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/lambo/turing/work/4mod/projects/capstone/capstone_py/stream_cycle/venv/lib/python3.12/site-packages/flask/app.py", line 882, in full_dispatch_request
+  File "/Users/scottdevoss/turing/4mod/projects/capstone/python/python-backend/venv/lib/python3.9/site-packages/flask/app.py", line 872, in full_dispatch_request
     rv = self.handle_user_exception(e)
-         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/lambo/turing/work/4mod/projects/capstone/capstone_py/stream_cycle/venv/lib/python3.12/site-packages/flask_cors/extension.py", line 176, in wrapped_function
+  File "/Users/scottdevoss/turing/4mod/projects/capstone/python/python-backend/venv/lib/python3.9/site-packages/flask_cors/extension.py", line 176, in wrapped_function
     return cors_after_request(app.make_response(f(*args, **kwargs)))
-                                                ^^^^^^^^^^^^^^^^^^
-  File "/Users/lambo/turing/work/4mod/projects/capstone/capstone_py/stream_cycle/venv/lib/python3.12/site-packages/flask/app.py", line 880, in full_dispatch_request
+  File "/Users/scottdevoss/turing/4mod/projects/capstone/python/python-backend/venv/lib/python3.9/site-packages/flask/app.py", line 870, in full_dispatch_request
     rv = self.dispatch_request()
-         ^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/lambo/turing/work/4mod/projects/capstone/capstone_py/stream_cycle/venv/lib/python3.12/site-packages/flask/app.py", line 865, in dispatch_request
+  File "/Users/scottdevoss/turing/4mod/projects/capstone/python/python-backend/venv/lib/python3.9/site-packages/flask/app.py", line 855, in dispatch_request
     return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/lambo/turing/work/4mod/projects/capstone/capstone_py/stream_cycle/app/routes/user_routes.py", line 25, in get_user
-    user = User.query.get_or_404(user_id)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/lambo/turing/work/4mod/projects/capstone/capstone_py/stream_cycle/venv/lib/python3.12/site-packages/flask_sqlalchemy/query.py", line 30, in get_or_404
-    rv = self.get(ident)
-         ^^^^^^^^^^^^^^^
-  File "<string>", line 2, in get
-  File "/Users/lambo/turing/work/4mod/projects/capstone/capstone_py/stream_cycle/venv/lib/python3.12/site-packages/sqlalchemy/util/deprecations.py", line 386, in warned
-    return fn(*args, **kwargs)  # type: ignore[no-any-return]
-           ^^^^^^^^^^^^^^^^^^^
-  File "/Users/lambo/turing/work/4mod/projects/capstone/capstone_py/stream_cycle/venv/lib/python3.12/site-packages/sqlalchemy/orm/query.py", line 1127, in get
-    return self._get_impl(ident, loading.load_on_pk_identity)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/lambo/turing/work/4mod/projects/capstone/capstone_py/stream_cycle/venv/lib/python3.12/site-packages/sqlalchemy/orm/query.py", line 1136, in _get_impl
-    return self.session._get_impl(
-           ^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/lambo/turing/work/4mod/projects/capstone/capstone_py/stream_cycle/venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 3817, in _get_impl
-    return db_load_fn(
-           ^^^^^^^^^^^
-  File "/Users/lambo/turing/work/4mod/projects/capstone/capstone_py/stream_cycle/venv/lib/python3.12/site-packages/sqlalchemy/orm/loading.py", line 694, in load_on_pk_identity
-    session.execute(
-  File "/Users/lambo/turing/work/4mod/projects/capstone/capstone_py/stream_cycle/venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2306, in execute
-    return self._execute_internal(
-           ^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/lambo/turing/work/4mod/projects/capstone/capstone_py/stream_cycle/venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2191, in _execute_internal
-    result: Result[Any] = compile_state_cls.orm_execute_statement(
-                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/lambo/turing/work/4mod/projects/capstone/capstone_py/stream_cycle/venv/lib/python3.12/site-packages/sqlalchemy/orm/context.py", line 293, in orm_execute_statement
-    result = conn.execute(
-             ^^^^^^^^^^^^^
-  File "/Users/lambo/turing/work/4mod/projects/capstone/capstone_py/stream_cycle/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1422, in execute
+  File "/Users/scottdevoss/turing/4mod/projects/capstone/python/python-backend/app/routes/user_routes.py", line 52, in update_user
+    db.session.commit()
+  File "/Users/scottdevoss/turing/4mod/projects/capstone/python/python-backend/venv/lib/python3.9/site-packages/sqlalchemy/orm/scoping.py", line 597, in commit
+    return self._proxied.commit()
+  File "/Users/scottdevoss/turing/4mod/projects/capstone/python/python-backend/venv/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 1972, in commit
+    trans.commit(_to_root=True)
+  File "<string>", line 2, in commit
+  File "/Users/scottdevoss/turing/4mod/projects/capstone/python/python-backend/venv/lib/python3.9/site-packages/sqlalchemy/orm/state_changes.py", line 139, in _go
+    ret_value = fn(self, *arg, **kw)
+  File "/Users/scottdevoss/turing/4mod/projects/capstone/python/python-backend/venv/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 1257, in commit
+    self._prepare_impl()
+  File "<string>", line 2, in _prepare_impl
+  File "/Users/scottdevoss/turing/4mod/projects/capstone/python/python-backend/venv/lib/python3.9/site-packages/sqlalchemy/orm/state_changes.py", line 139, in _go
+    ret_value = fn(self, *arg, **kw)
+  File "/Users/scottdevoss/turing/4mod/projects/capstone/python/python-backend/venv/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 1232, in _prepare_impl
+    self.session.flush()
+  File "/Users/scottdevoss/turing/4mod/projects/capstone/python/python-backend/venv/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 4296, in flush
+    self._flush(objects)
+  File "/Users/scottdevoss/turing/4mod/projects/capstone/python/python-backend/venv/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 4432, in _flush
+    transaction.rollback(_capture_exception=True)
+  File "/Users/scottdevoss/turing/4mod/projects/capstone/python/python-backend/venv/lib/python3.9/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/Users/scottdevoss/turing/4mod/projects/capstone/python/python-backend/venv/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 4392, in _flush
+    flush_context.execute()
+  File "/Users/scottdevoss/turing/4mod/projects/capstone/python/python-backend/venv/lib/python3.9/site-packages/sqlalchemy/orm/unitofwork.py", line 466, in execute
+    rec.execute(self)
+  File "/Users/scottdevoss/turing/4mod/projects/capstone/python/python-backend/venv/lib/python3.9/site-packages/sqlalchemy/orm/unitofwork.py", line 642, in execute
+    util.preloaded.orm_persistence.save_obj(
+  File "/Users/scottdevoss/turing/4mod/projects/capstone/python/python-backend/venv/lib/python3.9/site-packages/sqlalchemy/orm/persistence.py", line 85, in save_obj
+    _emit_update_statements(
+  File "/Users/scottdevoss/turing/4mod/projects/capstone/python/python-backend/venv/lib/python3.9/site-packages/sqlalchemy/orm/persistence.py", line 912, in _emit_update_statements
+    c = connection.execute(
+  File "/Users/scottdevoss/turing/4mod/projects/capstone/python/python-backend/venv/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1422, in execute
     return meth(
-           ^^^^^
-  File "/Users/lambo/turing/work/4mod/projects/capstone/capstone_py/stream_cycle/venv/lib/python3.12/site-packages/sqlalchemy/sql/elements.py", line 514, in _execute_on_connection
+  File "/Users/scottdevoss/turing/4mod/projects/capstone/python/python-backend/venv/lib/python3.9/site-packages/sqlalchemy/sql/elements.py", line 514, in _execute_on_connection
     return connection._execute_clauseelement(
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/lambo/turing/work/4mod/projects/capstone/capstone_py/stream_cycle/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1644, in _execute_clauseelement
+  File "/Users/scottdevoss/turing/4mod/projects/capstone/python/python-backend/venv/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1644, in _execute_clauseelement
     ret = self._execute_context(
-          ^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/lambo/turing/work/4mod/projects/capstone/capstone_py/stream_cycle/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1850, in _execute_context
+  File "/Users/scottdevoss/turing/4mod/projects/capstone/python/python-backend/venv/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1850, in _execute_context
     return self._exec_single_context(
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/lambo/turing/work/4mod/projects/capstone/capstone_py/stream_cycle/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1990, in _exec_single_context
+  File "/Users/scottdevoss/turing/4mod/projects/capstone/python/python-backend/venv/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1990, in _exec_single_context
     self._handle_dbapi_exception(
-  File "/Users/lambo/turing/work/4mod/projects/capstone/capstone_py/stream_cycle/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 2357, in _handle_dbapi_exception
+  File "/Users/scottdevoss/turing/4mod/projects/capstone/python/python-backend/venv/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 2357, in _handle_dbapi_exception
     raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
-  File "/Users/lambo/turing/work/4mod/projects/capstone/capstone_py/stream_cycle/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1971, in _exec_single_context
+  File "/Users/scottdevoss/turing/4mod/projects/capstone/python/python-backend/venv/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1971, in _exec_single_context
     self.dialect.do_execute(
-  File "/Users/lambo/turing/work/4mod/projects/capstone/capstone_py/stream_cycle/venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 919, in do_execute
+  File "/Users/scottdevoss/turing/4mod/projects/capstone/python/python-backend/venv/lib/python3.9/site-packages/sqlalchemy/engine/default.py", line 919, in do_execute
     cursor.execute(statement, parameters)
-sqlalchemy.exc.ProgrammingError: (psycopg2.errors.UndefinedTable) relation "users" does not exist
-LINE 2: FROM users 
-             ^
+sqlalchemy.exc.IntegrityError: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "users_email_key"
+DETAIL:  Key (email)=(lambertones239@gmail.com) already exists.
 
-[SQL: SELECT users.id AS users_id, users.email AS users_email, users.first_name AS users_first_name, users.last_name AS users_last_name, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
-FROM users 
-WHERE users.id = %(pk_1)s]
-[parameters: {'pk_1': 10}]
-(Background on this error at: https://sqlalche.me/e/20/f405)
-2024-04-11 18:16:55,426 INFO: Your application startup [in /Users/lambo/turing/work/4mod/projects/capstone/capstone_py/stream_cycle/app/__init__.py:31]
+[SQL: UPDATE users SET email=%(email)s, first_name=%(first_name)s, last_name=%(last_name)s, updated_at=%(updated_at)s WHERE users.id = %(users_id)s]
+[parameters: {'email': 'lambertones239@gmail.com', 'first_name': 'Scott', 'last_name': 'DeVoss', 'updated_at': datetime.datetime(2024, 4, 1, 14, 45, 56, 52035, tzinfo=datetime.timezone.utc), 'users_id': 2}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2024-04-01 09:18:04,780 INFO: Your application startup [in /Users/scottdevoss/turing/4mod/projects/capstone/python/python-backend/app/__init__.py:31]
+2024-04-01 09:44:24,986 INFO: Your application startup [in /Users/scottdevoss/turing/4mod/projects/capstone/python/python-backend/app/__init__.py:31]
+2024-04-11 13:19:47,153 INFO: Your application startup [in /Users/scottdevoss/turing/4mod/projects/capstone/python/python-backend/app/__init__.py:31]
+2024-04-11 13:45:21,305 INFO: Your application startup [in /Users/scottdevoss/turing/4mod/projects/capstone/python/python-backend/app/__init__.py:31]
+2024-04-11 13:56:22,402 INFO: Your application startup [in /Users/scottdevoss/turing/4mod/projects/capstone/python/python-backend/app/__init__.py:31]
+2024-04-11 15:30:01,381 INFO: Your application startup [in /Users/scottdevoss/turing/4mod/projects/capstone/python/python-backend/app/__init__.py:31]
+2024-04-11 15:30:03,989 INFO: Your application startup [in /Users/scottdevoss/turing/4mod/projects/capstone/python/python-backend/app/__init__.py:31]
+2024-04-12 09:11:19,984 INFO: Your application startup [in /Users/scottdevoss/turing/4mod/projects/capstone/python/python-backend/app/__init__.py:31]
+2024-04-12 10:10:27,496 INFO: Your application startup [in /Users/scottdevoss/turing/4mod/projects/capstone/python/python-backend/app/__init__.py:31]
+2024-04-12 14:11:17,945 INFO: Your application startup [in /Users/scottdevoss/turing/4mod/projects/capstone/python/python-backend/app/__init__.py:31]
+2024-04-12 15:21:30,622 INFO: Your application startup [in /Users/scottdevoss/turing/4mod/projects/capstone/python/python-backend/app/__init__.py:31]

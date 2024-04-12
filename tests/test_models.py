@@ -2,6 +2,8 @@ import pytest
 from app.extensions import db
 from app.models.models import User, Trip
 from datetime import datetime, timedelta
+import pdb
+
 
 @pytest.fixture(scope='module')
 def new_user():
@@ -15,17 +17,28 @@ def test_new_user(new_user):
 
 @pytest.fixture(scope='module')
 def new_trip(new_user):
-    trip = Trip(
-        start_location="45.453, -45.666",
-        end_location="34.656, -45.567",
-        trip_duration="2345234",
-        time_of_trip=datetime.utcnow() + timedelta(days=1),
-        user=new_user
-    )
-    return trip
+    trip_data = {
+        "start_location": {
+            'latitude': "40.7128",
+            'longitude': "-74.006"},
+        "end_location": {
+            'latitude': "34.0522",
+            'longitude': "-118.2437"},
+
+            'trip_duration': '2345234',
+            'time_of_trip': (datetime.utcnow() + timedelta(days=1)).strftime('%Y-%m-%d %H:%M:%S'),
+            'user_id': new_user.id
+        }
+    return trip_data
 
 def test_new_trip(new_trip):
-    assert new_trip.start_location == "45.453, -45.666"
-    assert new_trip.end_location == "34.656, -45.567"
-    assert new_trip.trip_duration == "2345234"
-    assert isinstance(new_trip.time_of_trip, datetime)
+    # pdb.set_trace()
+    assert new_trip['start_location']['latitude'] == "40.7128"
+    assert new_trip['end_location']['latitude'] == "34.0522"
+    assert new_trip['trip_duration'] == "2345234"
+
+
+    time_of_trip_str = new_trip['time_of_trip']
+    time_of_trip = datetime.strptime(time_of_trip_str, "%Y-%m-%d %H:%M:%S")
+    
+    assert isinstance(time_of_trip, datetime)
