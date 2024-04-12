@@ -3,7 +3,8 @@ import os
 class Config(object):
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     # Default to using a PostgreSQL database named 'capstone' on localhost
-    SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URI', 'postgresql://localhost/capstone')
+    SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URI', 'postgresql://capstone:password123@localhost:5432/capstone')
+    # postgresql://localhost/capstone
 
 class DevelopmentConfig(Config):
     DEBUG = True
