@@ -150,10 +150,13 @@ PUT http://127.0.0.1:5000/users/:id
 POST http://127.0.0.1:5000/users/:id/trips
 
 {
-  "start_location": "-541343, 24734",
-  "end_location": "-45458 349043",
-  "trip_duration": "704",
-  "time_of_trip": "2024-03-23 13:11:01"
+    "start_location_latitude": "40.7128",
+    "start_location_longitude": "-74.006",
+    "end_location_latitude": "34.0522",
+    "end_location_longitude": "-118.2437",
+    "trip_duration": "2345234",
+    "time_of_trip": "2024-05-13T15:26:03Z",  
+    "user_id": 1
 }
 ```
 
