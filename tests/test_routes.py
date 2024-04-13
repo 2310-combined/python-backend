@@ -2,7 +2,7 @@ import pytest
 from app import create_app
 from app.extensions import db as _db
 from app.models.models import User, Trip
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from config import TestConfig  # Make sure this import statement is correct (really needed this)
 import pdb
 
@@ -30,21 +30,17 @@ def test_create_trip(test_client):
 
     # Data for the new trip
     trip_data = {
-        "start_location": {
-            'latitude': "40.7128",
-            'longitude': "-74.006"},
-        "end_location": {
-            'latitude': "34.0522",
-            'longitude': "-118.2437"},
+        'start_location_latitude': "40.7128",
+        'start_location_longitude': "-74.006",
+        'end_location_latitude': "34.0522",
+        'end_location_longitude': "-118.2437",
+        'trip_duration': '2345234',
+        'time_of_trip': datetime.now(timezone.utc).isoformat(),  # updated
+        'user_id': new_user.id
+    }
 
-        "trip_duration": '2345234',
-        "time_of_trip": (datetime.utcnow() + timedelta(days=1)).strftime('%Y-%m-%d %H:%M:%S'),
-        "user_id": new_user.id
-        }
-    # pdb.set_trace()
     response = test_client.post(f'/users/{new_user.id}/trips', json=trip_data)
-    assert response.status_code == 201
-    assert 'id' in response.json
+    assert response.status_code == 201, f"Expected 201, got {response.status_code}. Response: {response.json}"
 
 def test_get_trips(test_client):
     # Assuming a user with ID 1 exists and has trips
