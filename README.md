@@ -141,7 +141,11 @@ GET http://127.0.0.1:5000/users
 ```
 PUT http://127.0.0.1:5000/users/:id
 
-!Coming Soon!
+{
+  "email": "lambertones@gmail.com",
+  "first_name": "Nathan",
+  "last_name": "Laaaambert"
+}
 ```
 
 - Create Trip
