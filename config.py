@@ -10,7 +10,8 @@ app = Flask(__name__)
 # Configuration Classes
 class Config(object):
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL').replace('postgres://', 'postgresql://', 1)
+    # Default to a local database if no environment-specific URI is provided
+    SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URI', 'postgresql://localhost/capstone')
 
 class DevelopmentConfig(Config):
     DEBUG = True
