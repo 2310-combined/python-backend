@@ -6,3 +6,4 @@ flask-migrate
 pytest-flask>=0.15.1
 flask_cors>=3.0.10
 psycopg2-binary>=2.8  # Use psycopg2-binary for ease of installation
+python-dotenv
