@@ -24,9 +24,9 @@ class TestConfig(Config):
     SQLALCHEMY_DATABASE_URI = os.getenv('TEST_DATABASE_URI', 'postgresql://localhost/capstone_test')
 
 class ProductionConfig(Config):
-    # Use the standard Heroku environment variable or another if explicitly set
-    SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL').replace("postgres://", "postgresql://", 1) if os.getenv('DATABASE_URL') else 'postgresql://localhost/capstone'
-
+    SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL', 'postgresql://localhost/capstone')
+    if SQLALCHEMY_DATABASE_URI.startswith("postgres://"):
+        SQLALCHEMY_DATABASE_URI = SQLALCHEMY_DATABASE_URI.replace("postgres://", "postgresql://", 1)
 # Environment-specific configuration
 env_config = {
     "development": DevelopmentConfig,
@@ -36,7 +36,10 @@ env_config = {
 
 # Set the configuration from environment
 config_type = os.getenv('FLASK_ENV', 'development')
-app.config.from_object(env_config[config_type])
+app.config.from_object({
+    'development': DevelopmentConfig,
+    'testing': TestConfig,
+    'production': ProductionConfig
+}[config_type])
 
-# Initialize SQLAlchemy
 db = SQLAlchemy(app)
