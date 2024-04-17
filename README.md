@@ -182,5 +182,5 @@ If you have a recommendation for improvements, please feel free to make a pull r
 
 ## Acknowledgments 
   - Project concept by [Jamie Francisco](https://www.linkedin.com/in/jamiefrancisco/)
-  - Technical direction, consultation, and moral support by [Jeremiah Black](https://www.linkedin.com/in/jeremiah-blackol/) and [Khoa Nguyen](https://www.linkedin.com/in/khoa-n323/)
+  - Technical direction, consultation, and moral support by [Jeremiah Black](https://www.linkedin.com/in/jeremiah-blackol/), [Khoa Nguyen](https://www.linkedin.com/in/khoa-n323/) and [Megan McMahon](https://www.linkedin.com/in/meganemcmahon1/)
   - This project completed by Mod 4 students at [Turing School of Software and Design](https://turing.edu/)
