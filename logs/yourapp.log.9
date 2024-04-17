@@ -1,4 +1,4 @@
-2024-04-11 18:16:39,491 ERROR: Exception on /users/10 [GET] [in /Users/lambo/turing/work/4mod/projects/capstone/capstone_py/stream_cycle/venv/lib/python3.12/site-packages/flask/app.py:838]
+2024-04-11 18:16:19,870 ERROR: Exception on /users/7 [GET] [in /Users/lambo/turing/work/4mod/projects/capstone/capstone_py/stream_cycle/venv/lib/python3.12/site-packages/flask/app.py:838]
 Traceback (most recent call last):
   File "/Users/lambo/turing/work/4mod/projects/capstone/capstone_py/stream_cycle/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1971, in _exec_single_context
     self.dialect.do_execute(
@@ -84,6 +84,5 @@ LINE 2: FROM users
 [SQL: SELECT users.id AS users_id, users.email AS users_email, users.first_name AS users_first_name, users.last_name AS users_last_name, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
 FROM users 
 WHERE users.id = %(pk_1)s]
-[parameters: {'pk_1': 10}]
+[parameters: {'pk_1': 7}]
 (Background on this error at: https://sqlalche.me/e/20/f405)
-2024-04-11 18:16:55,426 INFO: Your application startup [in /Users/lambo/turing/work/4mod/projects/capstone/capstone_py/stream_cycle/app/__init__.py:31]

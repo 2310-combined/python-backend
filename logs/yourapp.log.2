@@ -1,11 +1,12 @@
-2024-04-01 08:45:56,071 ERROR: Exception on /users/2 [PUT] [in /Users/scottdevoss/turing/4mod/projects/capstone/python/python-backend/venv/lib/python3.9/site-packages/flask/app.py:828]
+2024-04-16 19:01:10,282 ERROR: Exception on /users [POST] [in /Users/scottdevoss/turing/4mod/projects/capstone/python/python-backend/venv/lib/python3.9/site-packages/flask/app.py:828]
 Traceback (most recent call last):
   File "/Users/scottdevoss/turing/4mod/projects/capstone/python/python-backend/venv/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1971, in _exec_single_context
     self.dialect.do_execute(
   File "/Users/scottdevoss/turing/4mod/projects/capstone/python/python-backend/venv/lib/python3.9/site-packages/sqlalchemy/engine/default.py", line 919, in do_execute
     cursor.execute(statement, parameters)
-psycopg2.errors.UniqueViolation: duplicate key value violates unique constraint "users_email_key"
-DETAIL:  Key (email)=(lambertones239@gmail.com) already exists.
+psycopg2.errors.UndefinedTable: relation "users" does not exist
+LINE 2: FROM users 
+             ^
 
 
 The above exception was the direct cause of the following exception:
@@ -21,38 +22,18 @@ Traceback (most recent call last):
     rv = self.dispatch_request()
   File "/Users/scottdevoss/turing/4mod/projects/capstone/python/python-backend/venv/lib/python3.9/site-packages/flask/app.py", line 855, in dispatch_request
     return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
-  File "/Users/scottdevoss/turing/4mod/projects/capstone/python/python-backend/app/routes/user_routes.py", line 52, in update_user
-    db.session.commit()
-  File "/Users/scottdevoss/turing/4mod/projects/capstone/python/python-backend/venv/lib/python3.9/site-packages/sqlalchemy/orm/scoping.py", line 597, in commit
-    return self._proxied.commit()
-  File "/Users/scottdevoss/turing/4mod/projects/capstone/python/python-backend/venv/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 1972, in commit
-    trans.commit(_to_root=True)
-  File "<string>", line 2, in commit
-  File "/Users/scottdevoss/turing/4mod/projects/capstone/python/python-backend/venv/lib/python3.9/site-packages/sqlalchemy/orm/state_changes.py", line 139, in _go
-    ret_value = fn(self, *arg, **kw)
-  File "/Users/scottdevoss/turing/4mod/projects/capstone/python/python-backend/venv/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 1257, in commit
-    self._prepare_impl()
-  File "<string>", line 2, in _prepare_impl
-  File "/Users/scottdevoss/turing/4mod/projects/capstone/python/python-backend/venv/lib/python3.9/site-packages/sqlalchemy/orm/state_changes.py", line 139, in _go
-    ret_value = fn(self, *arg, **kw)
-  File "/Users/scottdevoss/turing/4mod/projects/capstone/python/python-backend/venv/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 1232, in _prepare_impl
-    self.session.flush()
-  File "/Users/scottdevoss/turing/4mod/projects/capstone/python/python-backend/venv/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 4296, in flush
-    self._flush(objects)
-  File "/Users/scottdevoss/turing/4mod/projects/capstone/python/python-backend/venv/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 4432, in _flush
-    transaction.rollback(_capture_exception=True)
-  File "/Users/scottdevoss/turing/4mod/projects/capstone/python/python-backend/venv/lib/python3.9/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
-    raise exc_value.with_traceback(exc_tb)
-  File "/Users/scottdevoss/turing/4mod/projects/capstone/python/python-backend/venv/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 4392, in _flush
-    flush_context.execute()
-  File "/Users/scottdevoss/turing/4mod/projects/capstone/python/python-backend/venv/lib/python3.9/site-packages/sqlalchemy/orm/unitofwork.py", line 466, in execute
-    rec.execute(self)
-  File "/Users/scottdevoss/turing/4mod/projects/capstone/python/python-backend/venv/lib/python3.9/site-packages/sqlalchemy/orm/unitofwork.py", line 642, in execute
-    util.preloaded.orm_persistence.save_obj(
-  File "/Users/scottdevoss/turing/4mod/projects/capstone/python/python-backend/venv/lib/python3.9/site-packages/sqlalchemy/orm/persistence.py", line 85, in save_obj
-    _emit_update_statements(
-  File "/Users/scottdevoss/turing/4mod/projects/capstone/python/python-backend/venv/lib/python3.9/site-packages/sqlalchemy/orm/persistence.py", line 912, in _emit_update_statements
-    c = connection.execute(
+  File "/Users/scottdevoss/turing/4mod/projects/capstone/python/python-backend/app/routes/user_routes.py", line 15, in create_user
+    if User.query.filter_by(email=data['email']).first():
+  File "/Users/scottdevoss/turing/4mod/projects/capstone/python/python-backend/venv/lib/python3.9/site-packages/sqlalchemy/orm/query.py", line 2728, in first
+    return self.limit(1)._iter().first()  # type: ignore
+  File "/Users/scottdevoss/turing/4mod/projects/capstone/python/python-backend/venv/lib/python3.9/site-packages/sqlalchemy/orm/query.py", line 2827, in _iter
+    result: Union[ScalarResult[_T], Result[_T]] = self.session.execute(
+  File "/Users/scottdevoss/turing/4mod/projects/capstone/python/python-backend/venv/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 2306, in execute
+    return self._execute_internal(
+  File "/Users/scottdevoss/turing/4mod/projects/capstone/python/python-backend/venv/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 2191, in _execute_internal
+    result: Result[Any] = compile_state_cls.orm_execute_statement(
+  File "/Users/scottdevoss/turing/4mod/projects/capstone/python/python-backend/venv/lib/python3.9/site-packages/sqlalchemy/orm/context.py", line 293, in orm_execute_statement
+    result = conn.execute(
   File "/Users/scottdevoss/turing/4mod/projects/capstone/python/python-backend/venv/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1422, in execute
     return meth(
   File "/Users/scottdevoss/turing/4mod/projects/capstone/python/python-backend/venv/lib/python3.9/site-packages/sqlalchemy/sql/elements.py", line 514, in _execute_on_connection
@@ -69,20 +50,14 @@ Traceback (most recent call last):
     self.dialect.do_execute(
   File "/Users/scottdevoss/turing/4mod/projects/capstone/python/python-backend/venv/lib/python3.9/site-packages/sqlalchemy/engine/default.py", line 919, in do_execute
     cursor.execute(statement, parameters)
-sqlalchemy.exc.IntegrityError: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "users_email_key"
-DETAIL:  Key (email)=(lambertones239@gmail.com) already exists.
+sqlalchemy.exc.ProgrammingError: (psycopg2.errors.UndefinedTable) relation "users" does not exist
+LINE 2: FROM users 
+             ^
 
-[SQL: UPDATE users SET email=%(email)s, first_name=%(first_name)s, last_name=%(last_name)s, updated_at=%(updated_at)s WHERE users.id = %(users_id)s]
-[parameters: {'email': 'lambertones239@gmail.com', 'first_name': 'Scott', 'last_name': 'DeVoss', 'updated_at': datetime.datetime(2024, 4, 1, 14, 45, 56, 52035, tzinfo=datetime.timezone.utc), 'users_id': 2}]
-(Background on this error at: https://sqlalche.me/e/20/gkpj)
-2024-04-01 09:18:04,780 INFO: Your application startup [in /Users/scottdevoss/turing/4mod/projects/capstone/python/python-backend/app/__init__.py:31]
-2024-04-01 09:44:24,986 INFO: Your application startup [in /Users/scottdevoss/turing/4mod/projects/capstone/python/python-backend/app/__init__.py:31]
-2024-04-11 13:19:47,153 INFO: Your application startup [in /Users/scottdevoss/turing/4mod/projects/capstone/python/python-backend/app/__init__.py:31]
-2024-04-11 13:45:21,305 INFO: Your application startup [in /Users/scottdevoss/turing/4mod/projects/capstone/python/python-backend/app/__init__.py:31]
-2024-04-11 13:56:22,402 INFO: Your application startup [in /Users/scottdevoss/turing/4mod/projects/capstone/python/python-backend/app/__init__.py:31]
-2024-04-11 15:30:01,381 INFO: Your application startup [in /Users/scottdevoss/turing/4mod/projects/capstone/python/python-backend/app/__init__.py:31]
-2024-04-11 15:30:03,989 INFO: Your application startup [in /Users/scottdevoss/turing/4mod/projects/capstone/python/python-backend/app/__init__.py:31]
-2024-04-12 09:11:19,984 INFO: Your application startup [in /Users/scottdevoss/turing/4mod/projects/capstone/python/python-backend/app/__init__.py:31]
-2024-04-12 10:10:27,496 INFO: Your application startup [in /Users/scottdevoss/turing/4mod/projects/capstone/python/python-backend/app/__init__.py:31]
-2024-04-12 14:11:17,945 INFO: Your application startup [in /Users/scottdevoss/turing/4mod/projects/capstone/python/python-backend/app/__init__.py:31]
-2024-04-12 15:21:30,622 INFO: Your application startup [in /Users/scottdevoss/turing/4mod/projects/capstone/python/python-backend/app/__init__.py:31]
+[SQL: SELECT users.id AS users_id, users.email AS users_email, users.first_name AS users_first_name, users.last_name AS users_last_name, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.email = %(email_1)s 
+ LIMIT %(param_1)s]
+[parameters: {'email_1': 'lambertones725746384@gmail.com', 'param_1': 1}]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2024-04-16 19:03:36,007 INFO: Your application startup [in /Users/scottdevoss/turing/4mod/projects/capstone/python/python-backend/app/__init__.py:31]
