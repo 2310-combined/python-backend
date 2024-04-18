@@ -176,6 +176,11 @@ GET http://127.0.0.1:5000/users/:id/trips
 DELETE http://127.0.0.1:5000/trips/:id
 ```
 
+## Still In Progress
+
+ - Full Heroku Deployment
+ - Successful connection and database storage for FE application
+
 ## Contributing
 
 If you have a recommendation for improvements, please feel free to make a pull request!
